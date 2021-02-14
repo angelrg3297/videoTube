@@ -9,14 +9,6 @@ class Video extends Model
 {
     use HasFactory;
 
-    public function comentarios(){  //1-N
-        return $this->hasMany('App\Models\Comentario');
-    }
-
-    public function usuario(){  //1-1
-        return $this->belongsTo('App\Models\User');
-    }
-
     /**
      * The attributes that are mass assignable.
      *
@@ -50,4 +42,12 @@ class Video extends Model
     protected $casts = [
         //'email_verified_at' => 'datetime',
     ];
+
+    public function comentarios(){  //1-N
+        return $this->hasMany('App\Models\Comentario');
+    }
+
+    public function usuario(){  //1-1
+        return $this->belongsTo('App\Models\User');
+    }
 }

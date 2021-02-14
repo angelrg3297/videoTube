@@ -9,14 +9,6 @@ class Comentario extends Model
 {
     use HasFactory;
 
-    public function videos(){  //1-1
-        return $this->belongsTo('App\Models\Videos');
-    }
-
-    public function usuario(){  //1-1
-        return $this->belongsTo('App\Models\User');
-    }
-
      /**
      * The attributes that are mass assignable.
      *
@@ -47,4 +39,12 @@ class Comentario extends Model
     protected $casts = [
         //'email_verified_at' => 'datetime',
     ];
+
+    public function videos(){  //1-1
+        return $this->belongsTo('App\Models\Videos');
+    }
+
+    public function usuario(){  //1-1
+        return $this->belongsTo('App\Models\User');
+    }
 }

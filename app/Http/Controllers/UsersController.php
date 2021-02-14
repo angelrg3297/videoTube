@@ -24,7 +24,7 @@ class UsersController extends Controller
         try {
             $user = User::all();
             return response()->json(array('msg' => $user, 'status' => 'success'), 200);
-        } catch (\Exception $e) {                        
+        } catch (\Throwable $th) {                        
             return response()->json(array('msg' => 'No hay registros disponibles', 'status' => 'false'), 400);
         }
     }
@@ -49,7 +49,7 @@ class UsersController extends Controller
             $user->save();
 
             return response()->json(array('msg' => 'Usuario Insertado', 'status' => 'success'), 200);
-        } catch (\Exception $e) {
+        } catch (\Throwable $th) {
             return response()->json(array('msg' => 'Registro fallido', 'status' => 'false'), 400);
         }
     }
@@ -79,7 +79,7 @@ class UsersController extends Controller
     {
         try {
             return $user = User::findOrFail($id);
-        } catch (\Exception $e) {
+        } catch (\Throwable $th) {
             return response()->json(array('msg' => 'Usuario no encontrado', 'status' => 'false'), 400);
         }
     }
@@ -117,7 +117,7 @@ class UsersController extends Controller
             $user->save();
 
             return response()->json(array('msg' => 'Usuario Actualizado', 'status' => 'success'), 200);
-        } catch (\Exception $e) {
+        } catch (\Throwable $th) {
             return response()->json(array('msg' => 'Registro de actualizacion fallido', 'status' => 'false'), 400);
         }
     }
@@ -134,7 +134,7 @@ class UsersController extends Controller
             $user = User::findOrFail($id);
             $user->delete();
             return response()->json(array('msg' => 'Usuario Eliminado', 'status' => 'success'), 200);
-        } catch (\Exception $e) {
+        } catch (\Throwable $th) {
             return response()->json(array('msg' => 'Usuario no eliminado', 'status' => 'false'), 400);
         }
     }

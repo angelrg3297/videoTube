@@ -21,7 +21,6 @@ class CreateVideosTable extends Migration
             $table->integer('status')->default(1);
             $table->string('image', 255);
             $table->string('video_path', 255);
-            $table->string('url', md5(microtime()))->unique(); //
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();            
             // Relaciones

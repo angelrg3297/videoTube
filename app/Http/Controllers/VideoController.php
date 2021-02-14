@@ -21,7 +21,7 @@ class VideoController extends Controller
         try{
             $videos = Video::all();
             return response()->json(array('data' => $videos, 'status' => 'success'), 200);
-        } catch (\Exception $e){
+        } catch (\Throwable $th){
             return response()->json(array( 'data' => [], 'msg' => 'No hay registros disponibles', 'status' => 'false'), 400);
         }
     }
@@ -63,22 +63,10 @@ class VideoController extends Controller
             $video->save();
 
             return response()->json(array('data' => $video, 'status' => 'success'), 200);
-        } catch (\Exception $e) {
+        } catch (\Throwable $th) {
             return response()->json(array('data' => [], 'msg' => 'Registro fallido', 'status' => 'false'), 400);
         }
 
-        /*$video = new Video();
-        // TODO validar
-        $video = new Video();
-        $video->user_id = $request->user_id;
-        $video->title = $request->title;
-        $video->description = $request->description;        
-        $video->image = $request->image;
-        $video->video_path = $request->video_path;
-        $video->status = 1;
-        $video->save();
-
-        return response()->json(array('data' => $video, 'status' => 'success'), 200);*/
     }
 
     /**
@@ -91,7 +79,7 @@ class VideoController extends Controller
      //Prueba video David
     public function store(Request $request)
     {
-        $video = new Video();
+        /*$video = new Video();
 
         if($request->hasFile('image')){
 
@@ -105,7 +93,7 @@ class VideoController extends Controller
             return response()->json(["msg"=>"Imagen guardada correctamente"]);
         }else{
             return response()->json(["msg"=>"Error"]);
-        }
+        }*/
     }
 
     /**
@@ -120,7 +108,7 @@ class VideoController extends Controller
     {
         try {
             return $video = Video::findOrFail($id);
-        } catch (\Exception $e) {
+        } catch (\Throwable $th) {
             return response()->json(array('msg' => 'No se encontro video con ese id', 'status' => 'false'), 400);
         }
     }
@@ -148,22 +136,32 @@ class VideoController extends Controller
         try{
             $video = Video::findOrFail($id);
 
-            //$image = $request->file('image');
-            //$path = $image->store('public');
-
             $video->user_id = $request->input('user_id');
             $video->title = $request->input('title');
-            $video->description = $request->input('description');        
-            $video->image = $request->input('image');
-            //$video->image = $image;
-            $video->video_path = $request->input('video_path');
-            //$video->video_path = Storage::url($path);
-            $video->status = $request->input('status');
+            $video->description = $request->input('description');
+            $video->status = 1;
+            $video->save();
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
+        // Upload Archivos
+
+        try {
+            //Imagen
+            $image = $request->file('image');
+            $path = $image->store('public');
+            $video->image = $path;
+
+            //Video
+            $archivoVideo = $request->file('video_path');
+            $path = $archivoVideo->store('public');
+            $video->video_path = $path;            
             $video->save();
 
-            return response()->json(array('msg' => 'Actualizado correctamente', 'status' => 'success'), 200);
-        } catch (\Exception $e) {
-            return response()->json(array('msg' => 'Video no actualizado', 'status' => 'false'), 400);
+            return response()->json(array('data' => $video, 'status' => 'success'), 200);
+        } catch (\Throwable $th) {
+            return response()->json(array('data' => [], 'msg' => 'Actualizacion fallida', 'status' => 'false'), 400);
         }
     }
 
@@ -179,7 +177,7 @@ class VideoController extends Controller
             $video= Video::findOrFail($id);
             $video->delete();
             return response()->json(array('msg' => 'Eliminado correctamente', 'status' => 'success'), 200);
-        } catch (\Exception $e) {
+        } catch (\Throwable $th) {
             return response()->json(array('msg' => 'No se ha podido eliminar el video', 'status' => 'false'), 400);
         }
     }

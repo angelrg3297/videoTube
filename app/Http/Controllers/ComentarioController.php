@@ -18,7 +18,7 @@ class ComentarioController extends Controller
         try {
             $comentario = Comentario::all();
             return response()->json(array('data' => $comentario, 'status' => 'success'), 200);
-        } catch (\Exception $e) {                        
+        } catch (\Throwable $th) {
             return response()->json(array('data' => [], 'msg' => 'No hay comentarios disponibles', 'status' => 'false'), 400);
         }
     }
@@ -38,7 +38,7 @@ class ComentarioController extends Controller
             $comentario->save();
 
             return response()->json(array('data' => $comentario, 'msg' => 'Comentario creado', 'status' => 'success'), 200);
-        } catch (\Exception $e) {
+        } catch (\Throwable $th) {
             return response()->json(array('data' => [], 'msg' => 'Comentario fallido', 'status' => 'false'), 400);
         }
     }
@@ -65,7 +65,7 @@ class ComentarioController extends Controller
     {
         try {
             return $comentario = Comentario::findOrFail($id);
-        } catch (\Exception $e) {
+        } catch (\Throwable $th) {
             return response()->json(array('msg' => 'Comentario no encontrado', 'status' => 'false'), 400);
         }
     }
@@ -99,7 +99,7 @@ class ComentarioController extends Controller
             $comentario->save();
 
             return response()->json(array('msg' => 'Actualizado correctamente', 'status' => 'success'), 200);
-        } catch (\Exception $e) {
+        } catch (\Throwable $th) {
             return response()->json(array('msg' => 'Comentario no actualizado', 'status' => 'false'), 400);
         }
     }
@@ -116,7 +116,7 @@ class ComentarioController extends Controller
             $comentario= Comentario::findOrFail($id);
             $comentario->delete();
             return response()->json(array('msg' => 'Eliminado correctamente', 'status' => 'success'), 200);
-        } catch (\Exception $e) {
+        } catch (\Throwable $th) {
             return response()->json(array('msg' => 'No se ha podido eliminar el comentario', 'status' => 'false'), 400);
         }
     }
