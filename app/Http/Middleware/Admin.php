@@ -5,7 +5,6 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Middleware\Role as Middleware;
-
 use Illuminate\Support\Facades\Auth;
 
 class Admin
