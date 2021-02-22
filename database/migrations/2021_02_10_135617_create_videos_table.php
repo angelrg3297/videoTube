@@ -24,7 +24,7 @@ class CreateVideosTable extends Migration
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();            
             // Relaciones
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
     /**

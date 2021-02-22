@@ -20,6 +20,8 @@ class User extends Authenticatable
      *
      * @var array
      */
+    //El filleable te permite rellenar estos datos de forma masiva al mismo tiempo por muchos usuarios a la vez.
+    //Si lo comentas solo puedes hacer una conexion al mismo tiempo.
     protected $fillable = [
         'role',
         'name',

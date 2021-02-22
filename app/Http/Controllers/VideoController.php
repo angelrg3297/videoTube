@@ -59,7 +59,8 @@ class VideoController extends Controller
             //Video
             $archivoVideo = $request->file('video_path');
             $path = $archivoVideo->store('public');
-            $video->video_path = $path;            
+            $video->video_path = $path;
+                       
             $video->save();
 
             return response()->json(array('data' => $video, 'status' => 'success'), 200);

@@ -21,8 +21,9 @@ class CreateComentariosTable extends Migration
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
 
+            // Relaciones
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('video_id')->references('id')->on('videos')->onDelete('cascade');
+            $table->foreign('video_id')->references('id')->on('videos')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

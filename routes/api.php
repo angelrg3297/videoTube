@@ -58,8 +58,8 @@ Route::post('registro', 'App\Http\Controllers\Api\AuthController@register', func
 //RELACIONES MODELO VIDEO CON TABLAS
     //Usuario de un video --> 1:1
     Route::get('/videoUser/{video_id}', function($user_id){
-        //Buscamos el video 1 y cual es el nombre del usuario que lo ha subido.
-        $user=App\Models\Video::find(1)->usuario->name;
+        //Buscamos el video X y cual es el nombre del usuario que lo ha subido.
+        $user=App\Models\Video::find($video_id)->usuario->name;
         return response()->json($user);
     });
 
@@ -68,4 +68,10 @@ Route::post('registro', 'App\Http\Controllers\Api\AuthController@register', func
     Route::get('/userVideo/{user_id}', function($user_id){
         $videos=App\Models\User::find($user_id)->videos->title;
         return response()->json($videos);
+    });
+
+    //Todos los comentarios de un usuario --> 1:N
+    Route::get('/userComentario/{user_id}', function($user_id){
+        $comentarios=App\Models\User::find($user_id)->comentarios->body;
+        return response()->json($comentarios);
     });
