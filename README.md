@@ -25,6 +25,11 @@ Paso 4: Crear base de datos
 CREATE DATABASE videotube;
 ```
 
+Paso 4.1: Generar key
+```bash
+php artisan key:generate
+```
+
 Paso 5: Configurar el archivo .env con tus credenciales de base de datos
 ```env
 DB_CONNECTION=mysql
