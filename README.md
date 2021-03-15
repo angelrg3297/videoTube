@@ -7,7 +7,7 @@
 Paso 1: Clonar el repositorio
 
 ```bash
-git clone ...
+git clone https://github.com/angelrg3297/videoTube.git
 ```
 
 Paso 2:  Ejecutar composer para bajar las dependecias
